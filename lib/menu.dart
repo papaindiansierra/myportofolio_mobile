@@ -1,30 +1,34 @@
 import 'package:flutter/material.dart';
 
+// menambah atribut 'color' pada kelas model biar pewarnaan tombol jadi modular dan ringkas (biar ga buat banyak cabang if else)
 class ItemHomepage {
   final String name;
   final IconData icon;
+  final Color color; // atribut warna latar belakang kartu
 
-  ItemHomepage(this.name, this.icon);
+  ItemHomepage(this.name, this.icon, this.color);
 }
 
 class MyHomePage extends StatelessWidget {
   MyHomePage({super.key});
 
-  final String npm = "2406000001";
-  final String nama = "Burhan";
-  final String kelas = "PBP A";
+  // ubah data sesuai identitas diri sendiri
+  final String npm = "2506621812";
+  final String nama = "Muhammad Hafidz Muazzam";
+  final String kelas = "PBP C";
 
+  // daftar item menu dengan warna, tiap tombol warnanya beda
   final List<ItemHomepage> items = [
-    ItemHomepage("Lihat Proyek", Icons.folder),
-    ItemHomepage("Tambah Proyek", Icons.add_circle),
-    ItemHomepage("Logout", Icons.logout),
+    ItemHomepage("Lihat Proyek", Icons.folder, Colors.blue),
+    ItemHomepage("Tambah Proyek", Icons.add_circle, Colors.green),
+    ItemHomepage("Logout", Icons.logout, Colors.red),
   ];
 
   @override
   Widget build(BuildContext context) {
-    // Scaffold menyediakan struktur visual dasar halaman (AppBar, Body, SnackBar).
+    // scaffold untuk menyediakan struktur visual dasar halaman. yaitu AppBar, Body, SnackBar
     return Scaffold(
-      // AppBar menampilkan bar bagian atas halaman aplikasi.
+      // AppBar untuk menampilkan bar bagian atas halaman aplikasi
       appBar: AppBar(
         title: const Text(
           'MyPortfolio',
@@ -35,13 +39,13 @@ class MyHomePage extends StatelessWidget {
         ),
         backgroundColor: Theme.of(context).colorScheme.primary,
       ),
-      // Body halaman utama dengan padding di sekelilingnya.
+      // body halaman utama dan padding di kelilingnya
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            // Baris horizontal untuk menampilkan 3 InfoCard secara sejajar.
+            // baris horizontal untuk menampilkan 3 InfoCard dengan sejajar
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
@@ -53,7 +57,7 @@ class MyHomePage extends StatelessWidget {
 
             const SizedBox(height: 16.0),
 
-            // Bagian tengah: pesan sambutan dan kisi tombol menu portofolio.
+            // bagian tengah, text 'selamat datang' dan tombol menu portofolio
             Center(
               child: Column(
                 children: [
@@ -68,14 +72,13 @@ class MyHomePage extends StatelessWidget {
                     ),
                   ),
 
-                  // GridView menampilkan kartu tombol dalam tata letak kisi 3 kolom.
+                  // GridView untuk menampilkan kartu tombol dalam tata letak kisi 3 kolom
                   GridView.count(
                     primary: true,
                     padding: const EdgeInsets.all(20),
                     crossAxisSpacing: 10,
                     mainAxisSpacing: 10,
                     crossAxisCount: 3,
-                    // shrinkWrap agar ukuran kisi menyesuaikan tinggi konten anak.
                     shrinkWrap: true,
                     children: items.map((ItemHomepage item) {
                       return ItemCard(item);
@@ -92,7 +95,7 @@ class MyHomePage extends StatelessWidget {
 }
 
 class InfoCard extends StatelessWidget {
-  // Kartu informasi yang menampilkan judul (title) dan isi (content).
+  // kartu informasi yang menampilkan judul (title) dan isi (content)
   final String title;
   final String content;
 
@@ -101,13 +104,13 @@ class InfoCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
-      // Memberikan efek bayangan kartu elevasi 2 unit.
+      // effect shadow kartu elevasi
       elevation: 2.0,
       child: Container(
-        // Menyesuaikan lebar kartu dengan proporsi layar (dibagi 3.5).
+        // menyesuaikan lebar kartu dengan proporsi layar (dibagi dengan 3.5)
         width: MediaQuery.of(context).size.width / 3.5,
         padding: const EdgeInsets.all(16.0),
-        // Menyusun teks title dan content secara vertikal.
+        // menyusun teks title dan content secara vertikal
         child: Column(
           children: [
             Text(
@@ -115,7 +118,7 @@ class InfoCard extends StatelessWidget {
               style: const TextStyle(fontWeight: FontWeight.bold),
             ),
             const SizedBox(height: 8.0),
-            Text(content),
+            Text(content, textAlign: TextAlign.center),
           ],
         ),
       ),
@@ -131,13 +134,14 @@ class ItemCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Material(
-      // Menggunakan warna sekunder dari skema tema aplikasi.
-      color: Theme.of(context).colorScheme.secondary,
+      // menerapkan warna latar unik
+      // mengambil warna langsung dari atribut item.color yang sudah didefinisikan di list
+      color: item.color,
       borderRadius: BorderRadius.circular(12),
       child: InkWell(
-        // Aksi ketika kartu ditekan oleh pengguna.
+        // aksi ketika kartu ditekan oleh pengguna
         onTap: () {
-          // Menampilkan SnackBar dengan pesan interaktif.
+          // menampilkan SnackBar dengan pesan interaktif sesuai nama tombol saat ditap
           ScaffoldMessenger.of(context)
             ..hideCurrentSnackBar()
             ..showSnackBar(
