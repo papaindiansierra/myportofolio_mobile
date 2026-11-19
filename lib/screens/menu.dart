@@ -1,13 +1,8 @@
 import 'package:flutter/material.dart';
-
-// menambah atribut 'color' pada kelas model biar pewarnaan tombol jadi modular dan ringkas (biar ga buat banyak cabang if else)
-class ItemHomepage {
-  final String name;
-  final IconData icon;
-  final Color color; // atribut warna latar belakang kartu
-
-  ItemHomepage(this.name, this.icon, this.color);
-}
+// mengimpor widget LeftDrawer untuk menu navigasi samping
+import 'package:myportofolio_mobile/widgets/left_drawer.dart';
+// mengimpor widget ProjectCard (ItemHomepage & ItemCard)
+import 'package:myportofolio_mobile/widgets/project_card.dart';
 
 class MyHomePage extends StatelessWidget {
   MyHomePage({super.key});
@@ -26,7 +21,7 @@ class MyHomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // scaffold untuk menyediakan struktur visual dasar halaman. yaitu AppBar, Body, SnackBar
+    // scaffold untuk menyediakan struktur visual dasar halaman. yaitu AppBar, Body, SnackBar, dan Drawer
     return Scaffold(
       // AppBar untuk menampilkan bar bagian atas halaman aplikasi
       appBar: AppBar(
@@ -38,7 +33,11 @@ class MyHomePage extends StatelessWidget {
           ),
         ),
         backgroundColor: Theme.of(context).colorScheme.primary,
+        // mengubah warna ikon (termasuk ikon hamburger untuk membuka drawer) menjadi putih
+        iconTheme: const IconThemeData(color: Colors.white),
       ),
+      // memasang LeftDrawer sebagai menu navigasi geser dari sisi kiri layar
+      drawer: const LeftDrawer(),
       // body halaman utama dan padding di kelilingnya
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -120,54 +119,6 @@ class InfoCard extends StatelessWidget {
             const SizedBox(height: 8.0),
             Text(content, textAlign: TextAlign.center),
           ],
-        ),
-      ),
-    );
-  }
-}
-
-class ItemCard extends StatelessWidget {
-  final ItemHomepage item;
-
-  const ItemCard(this.item, {super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Material(
-      // menerapkan warna latar unik
-      // mengambil warna langsung dari atribut item.color yang sudah didefinisikan di list
-      color: item.color,
-      borderRadius: BorderRadius.circular(12),
-      child: InkWell(
-        // aksi ketika kartu ditekan oleh pengguna
-        onTap: () {
-          // menampilkan SnackBar dengan pesan interaktif sesuai nama tombol saat ditap
-          ScaffoldMessenger.of(context)
-            ..hideCurrentSnackBar()
-            ..showSnackBar(
-              SnackBar(content: Text("Kamu telah menekan tombol ${item.name}!"))
-            );
-        },
-        child: Container(
-          padding: const EdgeInsets.all(8),
-          child: Center(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Icon(
-                  item.icon,
-                  color: Colors.white,
-                  size: 30.0,
-                ),
-                const Padding(padding: EdgeInsets.all(3)),
-                Text(
-                  item.name,
-                  textAlign: TextAlign.center,
-                  style: const TextStyle(color: Colors.white),
-                ),
-              ],
-            ),
-          ),
         ),
       ),
     );
