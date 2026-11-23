@@ -45,3 +45,14 @@ statefulwidget bersifat dinamis dan dapat berubah sewaktu-waktu berdasarkan inte
 hot restart berfungsi untuk mereset ulang seluruh aplikasi dan menghapus state dari awal. wajib dilakukan jika ada perubahan struktur yang besar (seperti fungsi main())
 
 dalam pengerjaan tugas 7 ini, saya menggunakan bantuan ai yaitu gemini sebagai teman diskusi untuk memahami konsep dasar flutter dan merapikan struktur kode di menu.dart. walau terbantu dalam menyusun struktur kode, seluruh proses penyesuaian identitas pribadi, pengujian aplikasi, sampai pengecekan error melalui flutter analyze tetap saya verifikasi sendiri secara manual
+
+### Tugas 8
+1. navigator.push() menumpuk halaman baru di atas halaman lama agar bisa kembali, navigator.pushreplacement() mengganti halaman aktif saat ini, dan navigator.pop() menutup halaman teratas. kartu aksi memakai navigator.push() untuk membuka form, sedangkan opsi home di drawer memakai navigator.pushreplacement() ke halaman utama
+
+2. susunan scaffold, appbar, dan drawer menjaga kerangka layar, header atas, serta menu navigasi samping tetap seragam di setiap halaman. misalnya, warna tema utama aplikasi digunakan secara konsisten pada AppBar di halaman utama maupun halaman form.
+
+3. tata letak vertikal memudahkan alur isian form, widget yang mengatur jarak (seperti sizedbox dan padding) memberi ruang antar elemen, dan singlechildscrollview membuat form bisa discroll agar tidak overflow dan tombol simpan tetap terjangkau saat layar sempit atau papan ketik muncul
+
+4. globalkey mengakses state form, validator mengecek aturan tiap kolom, dan validate() menjalankan semua pengecekan saat tombol simpan ditekan. contoh input yang ditolak adalah tanggal selesai lebih awal dari tanggal mulai (atau kolom wajib kosong/spasi), karena jenis input atau papan ketik saja tidak mencegah input tidak valid secara aturan maupun logika
+
+pada pengerjaan tugas 8, saya memanfaatkan gemini untuk berdiskusi dalam merancang alur navigasi, struktur form, dan logika validasi. walau terbantu dengan ai, seluruh penyesuaian program di akhir, serta uji tampilan di desktop dan ponsel, tetap saya review dan pastikan sendiri secara manual
