@@ -44,7 +44,9 @@ class _ExperienceFormPageState extends State<ExperienceFormPage> {
     final DateTime initialDate = _startDate ?? now;
     final DateTime? picked = await showDatePicker(
       context: context,
-      initialDate: initialDate.isAfter(DateTime(now.year + 5)) ? now : initialDate,
+      initialDate: initialDate.isAfter(DateTime(now.year + 5))
+          ? now
+          : initialDate,
       firstDate: DateTime(1990),
       lastDate: DateTime(now.year + 5),
     );
@@ -53,8 +55,11 @@ class _ExperienceFormPageState extends State<ExperienceFormPage> {
       setState(() {
         _startDate = picked;
         _startDateError = null;
-        if (!_isCurrent && _endDate != null && _endDate!.isBefore(_startDate!)) {
-          _endDateError = "Tanggal selesai tidak boleh lebih awal dari tanggal mulai!";
+        if (!_isCurrent &&
+            _endDate != null &&
+            _endDate!.isBefore(_startDate!)) {
+          _endDateError =
+              "Tanggal selesai tidak boleh lebih awal dari tanggal mulai!";
         } else {
           _endDateError = null;
         }
@@ -67,7 +72,9 @@ class _ExperienceFormPageState extends State<ExperienceFormPage> {
     final DateTime initialDate = _endDate ?? _startDate ?? now;
     final DateTime? picked = await showDatePicker(
       context: context,
-      initialDate: initialDate.isAfter(DateTime(now.year + 5)) ? now : initialDate,
+      initialDate: initialDate.isAfter(DateTime(now.year + 5))
+          ? now
+          : initialDate,
       firstDate: DateTime(1990),
       lastDate: DateTime(now.year + 5),
     );
@@ -76,7 +83,8 @@ class _ExperienceFormPageState extends State<ExperienceFormPage> {
       setState(() {
         _endDate = picked;
         if (_startDate != null && _endDate!.isBefore(_startDate!)) {
-          _endDateError = "Tanggal selesai tidak boleh lebih awal dari tanggal mulai!";
+          _endDateError =
+              "Tanggal selesai tidak boleh lebih awal dari tanggal mulai!";
         } else {
           _endDateError = null;
         }
@@ -96,10 +104,12 @@ class _ExperienceFormPageState extends State<ExperienceFormPage> {
 
       if (!_isCurrent) {
         if (_endDate == null) {
-          _endDateError = "Tanggal selesai wajib dipilih jika belum berlangsung!";
+          _endDateError =
+              "Tanggal selesai wajib dipilih jika belum berlangsung!";
           valid = false;
         } else if (_startDate != null && _endDate!.isBefore(_startDate!)) {
-          _endDateError = "Tanggal selesai tidak boleh lebih awal dari tanggal mulai!";
+          _endDateError =
+              "Tanggal selesai tidak boleh lebih awal dari tanggal mulai!";
           valid = false;
         } else {
           _endDateError = null;
@@ -198,10 +208,7 @@ class _ExperienceFormPageState extends State<ExperienceFormPage> {
       appBar: AppBar(
         title: const Text(
           'Add Experience Form',
-          style: TextStyle(
-            color: Colors.white,
-            fontWeight: FontWeight.bold,
-          ),
+          style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
         ),
         backgroundColor: Theme.of(context).colorScheme.primary,
         iconTheme: const IconThemeData(color: Colors.white),
@@ -341,7 +348,9 @@ class _ExperienceFormPageState extends State<ExperienceFormPage> {
                     icon: const Icon(Icons.event_available),
                     label: Align(
                       alignment: Alignment.centerLeft,
-                      child: Text("Tanggal Selesai *: ${_formatDate(_endDate)}"),
+                      child: Text(
+                        "Tanggal Selesai *: ${_formatDate(_endDate)}",
+                      ),
                     ),
                     style: OutlinedButton.styleFrom(
                       padding: const EdgeInsets.symmetric(
